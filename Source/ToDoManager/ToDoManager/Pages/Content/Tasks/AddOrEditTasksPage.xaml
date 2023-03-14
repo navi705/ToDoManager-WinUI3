@@ -1,0 +1,60 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Page
+    x:Class="ToDoManager.Pages.AddOrEditTasksPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoManager.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" RowSpacing="20"  CornerRadius="10,10,10,10" BorderThickness="1" BorderBrush="{ThemeResource SystemAccentColor}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Task add or edit" Grid.Row="0"/>
+        <TextBox PlaceholderText="Title task" Text="{x:Bind ViewModel.Task.Name,Mode=TwoWay}" Grid.Row="1" />
+        <TextBox PlaceholderText="Description" Text="{x:Bind ViewModel.Task.Description,Mode=TwoWay}"  Grid.Row="2" />
+        <TimePicker Grid.Row="3" SelectedTime="{x:Bind ViewModel.Time,Mode=TwoWay}"   HorizontalAlignment="Stretch" />
+        <DatePicker Header="Pick a date" YearVisible="False" Grid.Row="4" HorizontalAlignment="Stretch" Date="{x:Bind ViewModel.Date,Mode=TwoWay}" />
+        
+        <ComboBox PlaceholderText="Reapet" Grid.Row="5" HorizontalAlignment="Stretch" SelectedValue="{x:Bind ViewModel.Task.Reapet,Mode=TwoWay}" >
+            <x:String>Simple Repeat</x:String>
+            <x:String>Daily</x:String>
+            <x:String>Weekly</x:String>
+            <x:String>Weekdays</x:String>
+            <x:String>Mouthly</x:String>
+            <x:String>Yearly</x:String>
+        </ComboBox>
+        
+        <!--add funcional-->
+        <TextBox PlaceholderText="Subtasks"  Grid.Row="6" Text="Later" />
+            <!--edit-->
+        <ComboBox PlaceholderText="Auto Skip" Grid.Row="7" HorizontalAlignment="Stretch" SelectedValue="{x:Bind ViewModel.AutoSkip, Mode=TwoWay}" >
+            <x:String>Yes</x:String>
+            <x:String>No</x:String>
+        </ComboBox>
+
+        <TextBox PlaceholderText="Group"  Grid.Row="8"  Text="Later}" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="9">
+            <Button Content="Save" HorizontalAlignment="Left" Command="{x:Bind ViewModel.SaveData}"/>
+            <Button Content="Delete" HorizontalAlignment="Center" Command="{x:Bind ViewModel.DeleteTask}" Background="Red" />
+            <Button Content="Cancel" HorizontalAlignment="Right" Command="{x:Bind ViewModel.ToTaskPage}"/>
+        </StackPanel>
+
+    </Grid>
+    
+</Page>

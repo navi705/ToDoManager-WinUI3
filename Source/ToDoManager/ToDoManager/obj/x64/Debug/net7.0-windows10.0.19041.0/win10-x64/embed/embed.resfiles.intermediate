@@ -1,0 +1,9 @@
+App.xbf
+MainWindow.xbf
+Pages\Authentication\LoginPage.xbf
+Pages\Authentication\RegisterPage.xbf
+Pages\Content\Tasks\AddOrEditTasksPage.xbf
+Pages\Content\Tasks\TasksPage.xbf
+Pages\Content\TimeManager\TimeMangerPage.xbf
+Pages\SettingsPage.xbf
+Pages\ShellPage.xbf

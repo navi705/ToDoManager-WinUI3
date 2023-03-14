@@ -1,0 +1,103 @@
+<Page
+    x:Class="ToDoManager.Pages.TimeMangerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoManager.Pages"
+    xmlns:model="using:ToDoManager.Models"
+    xmlns:converter="using:ToDoManager.HelpClasses"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converter:TimeSpanToString x:Key="myTimeConverter" />
+    </Page.Resources>
+
+    <Grid RowSpacing="15" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3"  ColumnSpacing="30"   >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button   Command="{x:Bind ViewModel.PrevDay,Mode=OneWay}" Grid.Column="0" >
+                <FontIcon FontSize="27" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0B0;" />
+            </Button>
+
+            <CalendarDatePicker FontSize="28" Date="{x:Bind ViewModel.DatePage,Mode=TwoWay}"  HorizontalAlignment="Center"  Grid.Column="1" />
+
+            <Button  Command="{x:Bind ViewModel.NextDay}"  Grid.Column="2" >
+                <FontIcon FontSize="27" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0AF;" />
+            </Button>
+        </Grid>
+        
+        <!--<Button Grid.Column="0" Grid.Row="0"  Command="{x:Bind ViewModel.PrevDay}">
+            <FontIcon FontSize="22" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0B0;" />
+        </Button>
+
+        <CalendarDatePicker FontSize="22" Date="{x:Bind ViewModel.DatePage,Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"  />
+
+        <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind ViewModel.NextDay}"  >
+            <FontIcon FontSize="22" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0AF;" />
+        </Button>-->
+
+        <Grid  Name="chart" Grid.Row="1"  Grid.ColumnSpan="3" MaxWidth="1200"  />
+
+
+
+        <Grid HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="3" ColumnSpacing="30" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Button  Command="{x:Bind ViewModel.AddTimeNote}"  >
+            <FontIcon FontSize="19" FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" Grid.Column="0" />
+        </Button>
+
+            <Button  Content="Save All " Command="{x:Bind ViewModel.SaveTimeNote}" Grid.Column="1"  />
+        </Grid>
+        
+        
+        <ListView ItemsSource="{x:Bind ViewModel.TimeTable,Mode=OneWay}" Grid.Row="3" Grid.ColumnSpan="3" SelectionMode = "None" IsItemClickEnabled = "False" >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Time">
+                    <ListViewItem>
+                        <Grid Grid.Column="5" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" ColumnSpacing="10"  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{x:Bind NameTask,Mode=TwoWay }"  Grid.Column="0" Grid.Row="1" Width="100" />
+                            <TimePicker Time="{x:Bind Of,Mode=TwoWay,Converter={StaticResource myTimeConverter}}" Grid.Column="1" Grid.Row="1" FontSize="14" />
+                            <TimePicker Time="{x:Bind To,Mode=TwoWay,Converter={StaticResource myTimeConverter}}" Grid.Column="2" Grid.Row="1"  FontSize="14" />
+
+                            <Button Grid.Row="1" Grid.Column="4"   Click="Button_Click_1" >
+                                <FontIcon FontSize="12" FontFamily="Segoe MDL2 Assets" Glyph="&#xE711;" />
+                            </Button>
+                        </Grid>
+                    </ListViewItem>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
