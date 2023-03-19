@@ -10,12 +10,16 @@ namespace ToDoManager.Asp.Net.Core.Services
 {
     public class JwtService
     {
-        //private readonly JwtSecurityToken _jwtToken;
         public string issuer;
+
         public string audience;
+
         public string secret;
+
         public int tokenLifeTime;
+
         public SymmetricSecurityKey symmetricSecurityKey;
+
         public JwtService(IOptions<JwtOption> jwtOption)
         {
 
@@ -25,22 +29,17 @@ namespace ToDoManager.Asp.Net.Core.Services
             tokenLifeTime = jwtOption.Value.TokenLifeTime;
             symmetricSecurityKey = jwtOption.Value.GetSymmetricSecurityKey();
         }
-
         public string GenerateToken(string email)
         {
-            var claims = new List<Claim>()
-            {
-                new Claim(JwtRegisteredClaimNames.Email, email),
-            };
-           var _jwtToken = new JwtSecurityToken(
-         issuer,
-         audience,
-         claims,
-         null,
-         DateTime.Now.AddMinutes(tokenLifeTime),
-         new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256)
-     );
-            return new JwtSecurityTokenHandler().WriteToken(_jwtToken);
+          var claims = new List<Claim>()
+          {
+            new Claim(JwtRegisteredClaimNames.Email, email),
+          };
+          var _jwtToken = new JwtSecurityToken(
+          issuer, audience,claims,null,
+          DateTime.Now.AddMinutes(tokenLifeTime),
+          new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256));
+          return new JwtSecurityTokenHandler().WriteToken(_jwtToken);
         }
 
         public string DecodeToken(string token)
@@ -48,10 +47,10 @@ namespace ToDoManager.Asp.Net.Core.Services
             var decode = new JwtSecurityTokenHandler().ReadJwtToken(token);
             var a = decode.Claims.ToList();
             string email = Convert.ToString(a[0]);
-           email= email.Replace("email: ", "");
+            email = email.Replace("email: ", "");
             return email;
         }
 
     }
-    
+
 }

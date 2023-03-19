@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ToDoManager.Asp.Net.Core.Models;
@@ -7,23 +6,20 @@ using ToDoManager.Asp.Net.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-//swagger
 builder.Services.AddMvc();
 builder.Services.AddMvc(options =>
 {
     options.SuppressAsyncSuffixInActionNames = false;
 });
 
+#if DEBUG
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title="Api",Description="Asp.Net" }) ; });
+#endif
 
-
-builder.Services.Configure < MongoDbConnection>(builder.Configuration.GetSection("MongoDB"));
+builder.Services.Configure<MongoDbConnection>(builder.Configuration.GetSection("MongoDB"));
 builder.Services.AddSingleton<MongoDbService>();
 
-
 builder.Services.AddAuthorization();
-
 
 builder.Services.Configure<JwtOption>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddSingleton<JwtService>();
@@ -38,7 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = authOption.Issuer,
             ValidateAudience = true,
             ValidAudience = authOption.Audience,
-            ValidateLifetime = false,
+            ValidateLifetime = true,
 
             // установка ключа безопасности
             IssuerSigningKey = authOption.GetSymmetricSecurityKey(),
@@ -50,19 +46,15 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//debug
+#if DEBUG
 app.UseSwagger();
 app.UseSwaggerUI();
+#endif
 
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
 app.MapControllers();
-
-app.MapGet("/", () => "Hello World!");
-
-
 
 app.Run();
 

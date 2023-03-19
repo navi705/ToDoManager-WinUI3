@@ -23,7 +23,7 @@ namespace ToDoManager.Services.Authentication
                 Password = password
             };
             //shiet code replace 
-            var uriBuilder = new UriBuilder($"{GlobalVariables._baseAddres}" + "jwt/Jwt/login");
+            var uriBuilder = new UriBuilder($"{GlobalVariables._baseAddres}" + "login");
             var paramValues = HttpUtility.ParseQueryString(uriBuilder.Query);
             paramValues.Add("email", user.Email);
             paramValues.Add("password", user.Password);
@@ -55,7 +55,7 @@ namespace ToDoManager.Services.Authentication
             HttpResponseMessage response;
             try
             {
-                response = await _httpClient.PostAsync($"{GlobalVariables._baseAddres}"+"jwt/Jwt", content);
+                response = await _httpClient.PostAsync($"{GlobalVariables._baseAddres}"+"users", content);
             }
             catch
             {

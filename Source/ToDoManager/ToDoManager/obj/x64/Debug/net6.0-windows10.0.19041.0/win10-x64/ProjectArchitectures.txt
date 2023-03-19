@@ -1,1 +1,0 @@
-C:\Users\vrclu\source\repos\ToDoManager\ToDoManager\ToDoManager.csproj;x64
