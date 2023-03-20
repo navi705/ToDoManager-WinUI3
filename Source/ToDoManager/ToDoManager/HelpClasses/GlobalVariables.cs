@@ -11,6 +11,6 @@ namespace ToDoManager.HelpClasses
     {
         //public static Uri _baseAddres =  new Uri("https://localhost:7078/");
         public static String _baseAddres ="https://localhost:7078/";
-        public static List<ToDoTask> ToDoTask { get; set; }
+        public static List<ToDoTask> ToDoTaskAddOrEdit { get; set; } = new();
     }
 }

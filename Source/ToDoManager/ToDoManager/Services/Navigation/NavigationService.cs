@@ -21,23 +21,13 @@ namespace ToDoManager.Services.Navigation
             _mainFrame = rootFrame;
             if (Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"] == "" || Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"] == null)
             {
-                NavigateTo<LoginViewModel>();
+                NavigateTo(typeof(LoginViewModel));
             }
             else
             {
-                NavigateTo<ShellViewModel>();
+                NavigateTo(typeof(ShellViewModel));
             }
             //NavigateTo<LoginViewModel>();
-        }
-
-        public void NavigateTo<T>() where T : ViewModelBase
-        {
-            InternalNavigateTo(typeof(T), null);
-        }
-
-        public void NavigateTo<T>(object parameter) where T : ViewModelBase
-        {
-            InternalNavigateTo(typeof(T), parameter);
         }
 
         public void NavigateTo(Type page) 
@@ -55,8 +45,8 @@ namespace ToDoManager.Services.Navigation
             _shellFrame?.BackStack.Remove(_shellFrame.BackStack.Last());
         }
 
-        //oh what i do i change private to public
-        public void InternalNavigateTo(Type viewModelType, object parameter)
+
+        private void InternalNavigateTo(Type viewModelType, object parameter)
         {
             var pageType = GetPageTypeForViewModel(viewModelType);
             _shellFrame?.Navigate(pageType, parameter);
@@ -69,13 +59,13 @@ namespace ToDoManager.Services.Navigation
                 _shellFrame = navFrame;
 
                 // navigate to book flight viewmodel //default
-                NavigateTo<TasksViewModel>();
+                NavigateTo(typeof(TasksViewModel));
             }
         }
 
         public void FrameBack() {
             _shellFrame = _mainFrame ;
-            NavigateTo<LoginViewModel>();
+            NavigateTo(typeof(LoginViewModel));
         }
         
         private Type GetPageTypeForViewModel(Type viewModelType)
@@ -86,6 +76,5 @@ namespace ToDoManager.Services.Navigation
             var viewType = Type.GetType(viewAssemblyName);
             return viewType;
         }
-
     }
 }

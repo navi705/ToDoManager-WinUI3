@@ -21,6 +21,12 @@
 
             <SolidColorBrush x:Key="TimePickerButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColor}"/>
 
+            <SolidColorBrush x:Key="DatePickerButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+
+            <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+            
+
             <SolidColorBrush x:Key="CalendarDatePickerBackgroundPointerOver" Color="{ThemeResource SystemAccentColor}"/>
 
             <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent"/>

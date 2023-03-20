@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
-using System.Text.Json;
-using ToDoManager.HelpClasses.ArrayExtensions;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 
@@ -11,7 +9,6 @@ namespace ToDoManager.HelpClasses
 {
     public static class Other
     {
-        //delete this in futher
         public static ApplicationDataContainer Storage = Windows.Storage.ApplicationData.Current.LocalSettings;
         public static ResourceLoader textStatus = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse();
         public static string SignUpResponse(HttpResponseMessage response)
@@ -22,14 +19,12 @@ namespace ToDoManager.HelpClasses
                 return textStatus.GetString("This_user_already_exists");
             return textStatus.GetString("Error");
         }
-        //cringe 
         public static string SignInResponse(HttpResponseMessage response)
         {
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var s = response.Content.ReadAsStringAsync().Result.ToString();
-                Token str = JsonSerializer.Deserialize<Token>(s);
-                Storage.Values["token"] = $"{str.token}" ;
+                var token = response.Content.ReadAsStringAsync().Result.ToString();
+                Storage.Values["token"] = $"{token}";
                 return "";
             }
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized || response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -37,13 +32,6 @@ namespace ToDoManager.HelpClasses
             return textStatus.GetString("Error");
         }
     }
-    public class Token
-    {
-        public string token { get; set; }
-    }
-
-
-
     public static class ObjectExtensions
     {
         private static readonly MethodInfo CloneMethod = typeof(Object).GetMethod("MemberwiseClone", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -120,51 +108,47 @@ namespace ToDoManager.HelpClasses
             return obj.GetHashCode();
         }
     }
-
-    namespace ArrayExtensions
+    public static class ArrayExtensions
     {
-        public static class ArrayExtensions
+        public static void ForEach(this Array array, Action<Array, int[]> action)
         {
-            public static void ForEach(this Array array, Action<Array, int[]> action)
+            if (array.LongLength == 0) return;
+            ArrayTraverse walker = new ArrayTraverse(array);
+            do action(array, walker.Position);
+            while (walker.Step());
+        }
+    }
+
+    internal class ArrayTraverse
+    {
+        public int[] Position;
+        private int[] maxLengths;
+
+        public ArrayTraverse(Array array)
+        {
+            maxLengths = new int[array.Rank];
+            for (int i = 0; i < array.Rank; ++i)
             {
-                if (array.LongLength == 0) return;
-                ArrayTraverse walker = new ArrayTraverse(array);
-                do action(array, walker.Position);
-                while (walker.Step());
+                maxLengths[i] = array.GetLength(i) - 1;
             }
+            Position = new int[array.Rank];
         }
 
-        internal class ArrayTraverse
+        public bool Step()
         {
-            public int[] Position;
-            private int[] maxLengths;
-
-            public ArrayTraverse(Array array)
+            for (int i = 0; i < Position.Length; ++i)
             {
-                maxLengths = new int[array.Rank];
-                for (int i = 0; i < array.Rank; ++i)
+                if (Position[i] < maxLengths[i])
                 {
-                    maxLengths[i] = array.GetLength(i) - 1;
-                }
-                Position = new int[array.Rank];
-            }
-
-            public bool Step()
-            {
-                for (int i = 0; i < Position.Length; ++i)
-                {
-                    if (Position[i] < maxLengths[i])
+                    Position[i]++;
+                    for (int j = 0; j < i; j++)
                     {
-                        Position[i]++;
-                        for (int j = 0; j < i; j++)
-                        {
-                            Position[j] = 0;
-                        }
-                        return true;
+                        Position[j] = 0;
                     }
+                    return true;
                 }
-                return false;
             }
+            return false;
         }
     }
 }

@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation and Contributors.
-// Licensed under the MIT License.
-
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -8,21 +5,14 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using ToDoManager.IoC;
 using ToDoManager.Models;
 using ToDoManager.ViewModels;
 using Windows.UI.ViewManagement;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace ToDoManager.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class TimeMangerPage : Page
     {
         public TimeMangerPage()
@@ -37,13 +27,13 @@ namespace ToDoManager.Pages
             base.OnNavigatedTo(e);
             ViewModel = DIHelper.Resolve<TimeMangerViewModel>();
             ViewModel.Intilization();
-             ViewModel.PropertyChanged += DrawChart;
+            ViewModel.PropertyChanged += DrawChart;
         }
 
         private void Button_Click_1(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             var button = (Button)e.OriginalSource;
-            var time = (Time)button.DataContext;
+            var time = (TimeNote)button.DataContext;
             ViewModel.DeleteTimeNote(time);
         }
 
@@ -64,10 +54,8 @@ namespace ToDoManager.Pages
             chart.Children.Add(grid);
 
             var timetable = ViewModel.TimeTable;
-            timetable = new ObservableCollection<Time>(timetable.OrderBy(x => x.Of).ToList());
+            timetable = new ObservableCollection<TimeNote>(timetable.OrderBy(x => x.Of).ToList());
             int row = timetable.Count + 3, column = timetable.Count;
-
-            
 
             for (int i = 0; i < row; ++i)
             {
@@ -80,16 +68,14 @@ namespace ToDoManager.Pages
             int[] arr = new int[timetable.Count];
 
             int coefficient = 2,coff = 1;
-           // int coefficient = column;
-            Dictionary<Time, TimeSpan> times1 = new();
+            Dictionary<TimeNote, TimeSpan> times1 = new();
             for (int i = 0; i < timetable.Count; ++i)
             {
                 TimeSpan timesNext = DateTimeOffset.Parse(timetable[i].To) - DateTimeOffset.Parse(timetable[i].Of);
                 times1.Add(timetable[i], timesNext);
             }
-            Dictionary<Time, TimeSpan> times2 = times1.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            Dictionary<TimeNote, TimeSpan> times2 = times1.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            // чинить
             for (int i = 0; i < timetable.Count-1; ++i)
             {
                 var timez = times2.Values.ElementAt(i + 1) - times2.Values.ElementAt(i);
@@ -107,11 +93,8 @@ namespace ToDoManager.Pages
                     }
                     arr[timetable.IndexOf(times2.Keys.ElementAt(i))] = coefficient;
                 }
-
-                //arr[timetable.IndexOf(times2.Keys.ElementAt(i))] = coefficient;
-                //coefficient++;
             }
-            //починить
+
             if (times2.Count >= 3)
             {
                 if (times2.Values.ElementAt(timetable.Count - 1) - times2.Values.ElementAt(timetable.Count - 2) > TimeSpan.Parse("00:50"))
@@ -162,23 +145,6 @@ namespace ToDoManager.Pages
                 Grid.SetColumn(textBlockNameTAsk, i);
                 Grid.SetRow(textBlockNameTAsk, i+2);
             }
-
         }
-          //for (int i = 0; i<timetable.Count-1; ++i)
-          //  {
-          //      var timez = times2.Values.ElementAt(i) - times2.Values.ElementAt(i + 1);
-          //      if (timez< -TimeSpan.Parse("00:50"))
-          //      {
-          //          coefficient *= 2;
-          //          arr[timetable.IndexOf(times2.Keys.ElementAt(i))] = coefficient;
-          //      }
-          //      else
-          //      {
-          //          arr[timetable.IndexOf(times2.Keys.ElementAt(i))] = coefficient;
-          //      }
-
-          //      //arr[timetable.IndexOf(times2.Keys.ElementAt(i))] = coefficient;
-          //      //coefficient++;
-          //  }
     }
 }

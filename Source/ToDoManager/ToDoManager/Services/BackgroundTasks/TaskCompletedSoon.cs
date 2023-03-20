@@ -13,9 +13,9 @@ namespace ToDoManager.Services.BackgroundTasks
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            if (GlobalVariables.ToDoTask == null)
+            if (GlobalVariables.ToDoTaskAddOrEdit == null)
                 return;
-            foreach(ToDoTask task in GlobalVariables.ToDoTask)
+            foreach(ToDoTask task in GlobalVariables.ToDoTaskAddOrEdit)
             {
                 if (DateTimeOffset.Parse(task.Date) > DateTimeOffset.Now )
                 {

@@ -17,7 +17,6 @@
     <None Remove="Pages\AddOrEditTasks.xaml" />
     <None Remove="Pages\LoginPage.xaml" />
     <None Remove="Pages\RegisterPage.xaml" />
-    <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\ShellPage.xaml" />
     <None Remove="Pages\TasksPage.xaml" />
     <None Remove="Pages\TimeMangerPage.xaml" />
@@ -42,8 +41,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
@@ -101,11 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\AddOrEditTasks.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

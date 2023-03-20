@@ -1,5 +1,4 @@
-﻿using ABI.Windows.ApplicationModel.Activation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,21 +10,20 @@ using ToDoManager.Models;
 using ToDoManager.Services.Navigation;
 using ToDoManager.Services.TimeManagerService;
 
-
 namespace ToDoManager.ViewModels
 {
     public class TimeMangerViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly ITimeManagerService _timeManagerService;
-       public TimeMangerViewModel(INavigationService navigationService,ITimeManagerService timeManagerService)
+        public TimeMangerViewModel(INavigationService navigationService, ITimeManagerService timeManagerService)
         {
-            _timeManagerService= timeManagerService;
+            _timeManagerService = timeManagerService;
             _navigationService = navigationService;
         }
 
-        private List<Time> _allTimeTable;
-        private List<Time> _forNowDayTimeTable;
+        private List<TimeNote> _allTimeTable = new();
+        private List<TimeNote> _forNowDayTimeTable = new();
 
         public async void Intilization()
         {
@@ -33,65 +31,64 @@ namespace ToDoManager.ViewModels
             if (response.IsSuccessStatusCode)
             {
                 DatePage = DateTimeOffset.Now;
-                var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true };             
-                var time = JsonSerializer.Deserialize<TimeTables>(response.Content.ReadAsStringAsync().Result.ToString(), options);
-                if(time.Timetable != null)
-                {      
-                    _allTimeTable = ObjectExtensions.Copy(time.Timetable);
+                var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true };
+                var time = JsonSerializer.Deserialize<List<TimeNote>>(response.Content.ReadAsStringAsync().Result.ToString(), options);
+                if (time.Count != 0)
+                {
+                    _allTimeTable = ObjectExtensions.Copy(time);
                     _forNowDayTimeTable = _allTimeTable.Where(x => x.Date == DateTimeOffset.Now.Date.ToShortDateString()).ToList();
-                    TimeTable = new ObservableCollection<Time>(time.Timetable.Where(x => x.Date == DateTimeOffset.Now.Date.ToShortDateString()).ToList());
-                    // TimeTable = new ObservableCollection<Time>(time.Timetable.Where(x => x.Date == DateTimeOffset.Now.Date.ToShortDateString()));
+                    TimeTable = new ObservableCollection<TimeNote>(time.Where(x => x.Date == DateTimeOffset.Now.Date.ToShortDateString()).ToList());
                 }
             }
-
         }
         private DateTimeOffset _datePage;
         public DateTimeOffset DatePage
         {
             get => _datePage;
-            set { _datePage = value; OnPropertyChanged(nameof(DatePage)); }
+            set { _datePage = value; OnPropertyChanged(nameof(DatePage)); changeDatePage(); }
         }
         
-        private ObservableCollection<Time> _timeTable;
-        public ObservableCollection<Time> TimeTable
+        private ObservableCollection<TimeNote> _timeTable = new();
+        public ObservableCollection<TimeNote> TimeTable
         {
             get => _timeTable;
             set { _timeTable = value; OnPropertyChanged(nameof(TimeTable)); }
         }
 
         public ICommand AddTimeNote => new Command(() => addTimeNote());
-        private  void  addTimeNote()
+        private void addTimeNote()
         {
-            //var time = TimeTable;
-            //time.Add(new Time { NameTask = "Empty", Date = DatePage.Date.ToShortDateString(), Of = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm"), To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm") });
-            //TimeTable = time;
-            TimeTable.Add(new Time { NameTask = "Empty", Date = DatePage.Date.ToShortDateString(), Of= DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm"), To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm") });
+            TimeTable.Add(new TimeNote
+            {
+                NameTask = "Empty",
+                Date = DatePage.Date.ToShortDateString(),
+                Of = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm"),
+                To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm")
+            });
         }
 
-        public  ICommand SaveTimeNote => new Command(() => saveTimeNote());
+        public ICommand SaveTimeNote => new Command(() => saveTimeNote());
         private async void saveTimeNote()
         {
-
-            for(int i=0; i < TimeTable.Count; ++i)
+            for (int i = 0; i < TimeTable.Count; ++i)
             {
-                if(_forNowDayTimeTable.Count > i)
+                if (_forNowDayTimeTable.Count > i)
                 {
-                    if (TimeTable[i].NameTask != _forNowDayTimeTable[i].NameTask || TimeTable[i].Of != _forNowDayTimeTable[i].Of || TimeTable[i].To != _forNowDayTimeTable[i].To)
+                    if (TimeTable[i].NameTask != _forNowDayTimeTable[i].NameTask || TimeTable[i].Of != _forNowDayTimeTable[i].Of ||
+                        TimeTable[i].To != _forNowDayTimeTable[i].To)
                     {
-                        //починить
                         if (DateTimeOffset.Parse(TimeTable[i].Of) < DateTimeOffset.Parse(TimeTable[i].To))
                         {
                             await _timeManagerService.PutTimeTableAsync(TimeTable[i], _forNowDayTimeTable[i].NameTask);
                         }
-                    else
-                    {
-                        //сообщение об ошибке
+                        else
+                        {
+                            //сообщение об ошибке
+                        }
                     }
-                }
                 }
                 else
                 {
-                    // maybe it's wrong
                     if (DateTimeOffset.Parse(TimeTable[i].Of) < DateTimeOffset.Parse(TimeTable[i].To))
                     {
                         await _timeManagerService.PutTimeTableAsync(TimeTable[i], TimeTable[i].NameTask);
@@ -102,19 +99,18 @@ namespace ToDoManager.ViewModels
                     }
                 }
             }
-            
+
         }
-        public async void DeleteTimeNote(Time time)
+        public async void DeleteTimeNote(TimeNote time)
         {
             var tempTime = TimeTable;
-            foreach (Time times in TimeTable)
+            foreach (TimeNote times in TimeTable)
             {
                 if (times == time)
                 {
                     await _timeManagerService.DeleteTimeTableAsync(time);
                     tempTime.Remove(time);
                     TimeTable = tempTime;
-                    //TimeTable.Remove(time);
                     break;
                 }
             }
@@ -135,10 +131,7 @@ namespace ToDoManager.ViewModels
         private void changeDatePage()
         {
             _forNowDayTimeTable = ObjectExtensions.Copy(_allTimeTable.Where(x => x.Date == DatePage.Date.ToShortDateString()).ToList());
-            TimeTable = new ObservableCollection<Time>(ObjectExtensions.Copy(_forNowDayTimeTable));
+            TimeTable = new ObservableCollection<TimeNote>(ObjectExtensions.Copy(_forNowDayTimeTable));
         }
-
-       
-
     }
 }

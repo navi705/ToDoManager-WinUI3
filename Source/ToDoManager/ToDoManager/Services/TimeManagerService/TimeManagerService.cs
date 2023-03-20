@@ -23,17 +23,16 @@ namespace ToDoManager.Services.TimeManagerService
                 return null;
             }
             return response;
-
         }
 
-        public async Task<HttpResponseMessage> PutTimeTableAsync(Time time,string name)
+        public async Task<HttpResponseMessage> PutTimeTableAsync(TimeNote time,string name)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString());
             HttpResponseMessage response;
 
             try
             {
-                response = await _httpClient.PutAsync($"{GlobalVariables._baseAddres}" + $"timetable?name={name}", JsonContent.Create(time));
+                response = await _httpClient.PutAsync($"{GlobalVariables._baseAddres}" + $"timetables?name={name}", JsonContent.Create(time));
             }
             catch
             {
@@ -42,13 +41,13 @@ namespace ToDoManager.Services.TimeManagerService
             return response;
         }
 
-        public async Task<HttpResponseMessage> DeleteTimeTableAsync(Time time)
+        public async Task<HttpResponseMessage> DeleteTimeTableAsync(TimeNote time)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString());
             HttpResponseMessage response;
             try
             {
-                response = await _httpClient.DeleteAsync($"{GlobalVariables._baseAddres}" + $"timetable?name={time.NameTask}");
+                response = await _httpClient.DeleteAsync($"{GlobalVariables._baseAddres}" + $"timetables?name={time.NameTask}");
             }
             catch
             {

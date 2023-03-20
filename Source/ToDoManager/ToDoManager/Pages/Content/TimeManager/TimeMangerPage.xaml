@@ -37,44 +37,31 @@
                 <FontIcon FontSize="27" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0B0;" />
             </Button>
 
-            <CalendarDatePicker FontSize="28" Date="{x:Bind ViewModel.DatePage,Mode=TwoWay}"  HorizontalAlignment="Center"  Grid.Column="1" />
+            <CalendarDatePicker FontSize="28" Date="{x:Bind ViewModel.DatePage,Mode=TwoWay}"   HorizontalAlignment="Center"  Grid.Column="1" />
 
             <Button  Command="{x:Bind ViewModel.NextDay}"  Grid.Column="2" >
                 <FontIcon FontSize="27" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0AF;" />
             </Button>
         </Grid>
-        
-        <!--<Button Grid.Column="0" Grid.Row="0"  Command="{x:Bind ViewModel.PrevDay}">
-            <FontIcon FontSize="22" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0B0;" />
-        </Button>
-
-        <CalendarDatePicker FontSize="22" Date="{x:Bind ViewModel.DatePage,Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"  />
-
-        <Button Grid.Row="0" Grid.Column="2" Command="{x:Bind ViewModel.NextDay}"  >
-            <FontIcon FontSize="22" FontFamily="Segoe MDL2 Assets" Glyph="&#xF0AF;" />
-        </Button>-->
 
         <Grid  Name="chart" Grid.Row="1"  Grid.ColumnSpan="3" MaxWidth="1200"  />
-
-
 
         <Grid HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="3" ColumnSpacing="30" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Button  Command="{x:Bind ViewModel.AddTimeNote}"  >
-            <FontIcon FontSize="19" FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" Grid.Column="0" />
-        </Button>
+                <FontIcon FontSize="19" FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" Grid.Column="0" />
+            </Button>
 
             <Button  Content="Save All " Command="{x:Bind ViewModel.SaveTimeNote}" Grid.Column="1"  />
         </Grid>
-        
-        
+
         <ListView ItemsSource="{x:Bind ViewModel.TimeTable,Mode=OneWay}" Grid.Row="3" Grid.ColumnSpan="3" SelectionMode = "None" IsItemClickEnabled = "False" >
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Time">
+                <DataTemplate x:DataType="model:TimeNote">
                     <ListViewItem>
                         <Grid Grid.Column="5" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center" ColumnSpacing="10"  >
                             <Grid.RowDefinitions>
@@ -94,6 +81,7 @@
                             <Button Grid.Row="1" Grid.Column="4"   Click="Button_Click_1" >
                                 <FontIcon FontSize="12" FontFamily="Segoe MDL2 Assets" Glyph="&#xE711;" />
                             </Button>
+                            
                         </Grid>
                     </ListViewItem>
                 </DataTemplate>
