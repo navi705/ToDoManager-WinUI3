@@ -1,5 +1,3 @@
-<!-- Copyright (c) Microsoft Corporation and Contributors. -->
-<!-- Licensed under the MIT License. -->
 
 <Page
     x:Class="ToDoManager.Pages.AddOrEditTasksPage"
@@ -25,13 +23,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock HorizontalAlignment="Center" Text="Task Add Or Edit" Grid.Row="0" FontSize="22" />
-        <TextBox PlaceholderText="Title task" Text="{x:Bind ViewModel.Task.Name,Mode=TwoWay}" Grid.Row="1" />
-        <TextBox PlaceholderText="Description" Text="{x:Bind ViewModel.Task.Description,Mode=TwoWay}"  Grid.Row="2" />
-        <TimePicker Header="Pick a time" Grid.Row="3" SelectedTime="{x:Bind ViewModel.Time,Mode=TwoWay}"   HorizontalAlignment="Stretch" />
-        <DatePicker Header="Pick a date" YearVisible="False" Grid.Row="4" HorizontalAlignment="Stretch" Date="{x:Bind ViewModel.Date,Mode=TwoWay}" />
-        
-        <ComboBox PlaceholderText="Reapet" Grid.Row="5" HorizontalAlignment="Stretch" SelectedValue="{x:Bind ViewModel.Task.Reapet,Mode=TwoWay}" >
+        <TextBlock HorizontalAlignment="Center" x:Uid="Task_Add_Or_Edit" Grid.Row="0" FontSize="22" />
+        <TextBox x:Uid="Title_task" Text="{x:Bind ViewModel.Task.Name,Mode=TwoWay}" Grid.Row="1" />
+        <TextBox x:Uid="Description" Text="{x:Bind ViewModel.Task.Description,Mode=TwoWay}"  Grid.Row="2" />
+        <TimePicker x:Uid="Pick_a_time" Grid.Row="3" SelectedTime="{x:Bind ViewModel.Time,Mode=TwoWay}"   HorizontalAlignment="Stretch" />
+        <DatePicker x:Uid="Pick_a_date" YearVisible="False" Grid.Row="4" HorizontalAlignment="Stretch" Date="{x:Bind ViewModel.Date,Mode=TwoWay}" />
+
+        <ComboBox x:Uid="Reapet" Grid.Row="5" HorizontalAlignment="Stretch" SelectedValue="{x:Bind ViewModel.Task.Reapet,Mode=TwoWay}" >
             <x:String>Simple Repeat</x:String>
             <x:String>Daily</x:String>
             <x:String>Weekly</x:String>
@@ -58,10 +56,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Grid.Row="1" Content="Add subtask" HorizontalAlignment="Center" Command="{x:Bind ViewModel.AddSubTask}" />
+            <Button Grid.Row="1" x:Uid="Add_Subtask"  HorizontalAlignment="Center" Command="{x:Bind ViewModel.AddSubTask}" />
         </Grid>
 
-        <ComboBox PlaceholderText="Auto Skip" Grid.Row="7" HorizontalAlignment="Stretch" SelectedValue="{x:Bind ViewModel.AutoSkip, Mode=TwoWay}" >
+        <ComboBox x:Uid="Auto_Skip" Grid.Row="7" HorizontalAlignment="Stretch" SelectedValue="{x:Bind ViewModel.AutoSkip, Mode=TwoWay}" >
             <x:String>Yes</x:String>
             <x:String>No</x:String>
         </ComboBox>
@@ -72,9 +70,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Save"   Command="{x:Bind ViewModel.SaveData}"/>
-            <Button Grid.Column="1" Content="Delete" Command="{x:Bind ViewModel.DeleteTask}"/>
-            <Button Grid.Column="2"  Content="Cancel" Command="{x:Bind ViewModel.ToTaskPage}"/>
+            <Button Grid.Column="0" x:Uid="Save" Command="{x:Bind ViewModel.SaveData}"/>
+            <Button Grid.Column="1" x:Uid="Delete" Command="{x:Bind ViewModel.DeleteTask}"/>
+            <Button Grid.Column="2" x:Uid="Cancel" Command="{x:Bind ViewModel.ToTaskPage}"/>
         </Grid>
 
     </Grid>

@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add_Subtask.Content" xml:space="preserve">
+    <value>Добавить Под задачу</value>
+  </data>
+  <data name="Add_Task.Content" xml:space="preserve">
+    <value>Добавить Задачу</value>
+  </data>
+  <data name="All_Tasks.Text" xml:space="preserve">
+    <value>Все Задачи</value>
+  </data>
+  <data name="Auto_Skip.PlaceholderText" xml:space="preserve">
+    <value>Авто Повторение</value>
+  </data>
   <data name="Back.Content" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="Cancel.Content" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
   <data name="Check_internet_connection" xml:space="preserve">
     <value>Проверьте соединение с интернетом</value>
+  </data>
+  <data name="Daily_Tasks.Text" xml:space="preserve">
+    <value>Ежедневные задачи</value>
+  </data>
+  <data name="Delete.Content" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Description.PlaceholderText" xml:space="preserve">
+    <value>Описание</value>
   </data>
   <data name="Dont Have Account.Content" xml:space="preserve">
     <value>Нет Аккаунта? Зарегистрируйтесь!</value>
@@ -141,11 +165,20 @@
   <data name="Login To Your Account.Text" xml:space="preserve">
     <value>Войдите В Свой Аккаунт</value>
   </data>
+  <data name="Mouthly_Tasks.Text" xml:space="preserve">
+    <value>Ежемесячные задачи</value>
+  </data>
   <data name="Passwords_do_not_match" xml:space="preserve">
     <value>Пароли не совпадают</value>
   </data>
   <data name="Password_not_correct" xml:space="preserve">
     <value>Пароль не правильный</value>
+  </data>
+  <data name="Pick_a_date.Header" xml:space="preserve">
+    <value>Выберите Дату</value>
+  </data>
+  <data name="Pick_a_time.Header" xml:space="preserve">
+    <value>Выберите Время</value>
   </data>
   <data name="Please_enter_a_valid_email" xml:space="preserve">
     <value>Пожалуйста, введите действительный адрес электронной почты</value>
@@ -156,11 +189,20 @@
   <data name="Reapeat_Password.PlaceholderText" xml:space="preserve">
     <value>Повторите пароль</value>
   </data>
+  <data name="Reapet.PlaceholderText" xml:space="preserve">
+    <value>Повторения</value>
+  </data>
   <data name="Register Your Account.Text" xml:space="preserve">
     <value>Зарегиструйте Свой Аккаунт</value>
   </data>
   <data name="Remember me.Content" xml:space="preserve">
     <value>Запомнить Меня</value>
+  </data>
+  <data name="Save.Content" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Save_All.Content" xml:space="preserve">
+    <value>Сохранить Всё</value>
   </data>
   <data name="Server_error" xml:space="preserve">
     <value>Ошибка сервера </value>
@@ -171,11 +213,26 @@
   <data name="Sign_Up.Content" xml:space="preserve">
     <value>Регистрация</value>
   </data>
+  <data name="Simple_Reapet_Tasks.Text" xml:space="preserve">
+    <value>Разовые задачи</value>
+  </data>
   <data name="Successfully" xml:space="preserve">
     <value>Успешно</value>
   </data>
+  <data name="Task_Add_Or_Edit.Text" xml:space="preserve">
+    <value>Добавить Или Изменить Задачу</value>
+  </data>
   <data name="This_user_already_exists" xml:space="preserve">
     <value>Такой пользователь уже есть</value>
+  </data>
+  <data name="Title_task.PlaceholderText" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Today_Tasks.Text" xml:space="preserve">
+    <value>Задачи на сегодня</value>
+  </data>
+  <data name="Tommorw_Tasks.Text" xml:space="preserve">
+    <value>Задачи на завтра</value>
   </data>
   <data name="User_not_found" xml:space="preserve">
     <value>Такого пользователя не существует </value>

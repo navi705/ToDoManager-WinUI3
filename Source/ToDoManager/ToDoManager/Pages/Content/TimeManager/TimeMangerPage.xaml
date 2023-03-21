@@ -56,7 +56,7 @@
                 <FontIcon FontSize="19" FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" Grid.Column="0" />
             </Button>
 
-            <Button  Content="Save All " Command="{x:Bind ViewModel.SaveTimeNote}" Grid.Column="1"  />
+            <Button x:Uid="Save_All" Command="{x:Bind ViewModel.SaveTimeNote}" Grid.Column="1"  />
         </Grid>
 
         <ListView ItemsSource="{x:Bind ViewModel.TimeTable,Mode=OneWay}" Grid.Row="3" Grid.ColumnSpan="3" SelectionMode = "None" IsItemClickEnabled = "False" >

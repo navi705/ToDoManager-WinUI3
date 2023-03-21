@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Windows.Input;
+using ToDoManager.HelpClasses;
 using ToDoManager.Models;
 using ToDoManager.Services.Navigation;
 using ToDoManager.Services.Tasks;
@@ -97,7 +98,7 @@ namespace ToDoManager.ViewModels
                 TasksToday = new ObservableCollection<ToDoTask>(tasks.Where(x => (x.Finish == false && x.Date == DateTimeOffset.Now.Date.ToShortDateString())).ToList());
                 TasksTomorrow = new ObservableCollection<ToDoTask>(tasks.Where(x => (x.Finish == false && 
                 x.Date == DateTimeOffset.Now.AddDays(1).Date.ToShortDateString())).ToList());
-                //GlobalVariables.ToDoTask = Tasks;
+                GlobalVariables.ToDoTasks = Tasks;
             }
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
@@ -105,7 +106,6 @@ namespace ToDoManager.ViewModels
                 Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"] = "";
                 _navigationService.FrameBack();
             }
-
         }
 
         public void ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
@@ -149,7 +149,7 @@ namespace ToDoManager.ViewModels
 
         private async void addTimeNote(ToDoTask task)
         {
-            TimeNote timeNote = new() { NameTask=task.Name, Date=task.Date,Of=task.Time,To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm") };
+            TimeNote timeNote = new() { NameTask=task.Name, Date=task.Date,Of= DateTimeOffset.Now.Date.ToShortDateString() , To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm") };
             await _timeService.PutTimeTableAsync(timeNote, "");
         }
 

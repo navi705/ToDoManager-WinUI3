@@ -1,21 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using ToDoManager.HelpClasses;
 using ToDoManager.Models;
 using Windows.ApplicationModel.Background;
 
 namespace ToDoManager.Services.BackgroundTasks
 {
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("56e48bc6-a15b-4e63-9495-a6cf6f788bce")]
+    [ComSourceInterfaces(typeof(IBackgroundTask))]
     public class TaskCompletedSoon : IBackgroundTask
     {
+        [MTAThread]
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            if (GlobalVariables.ToDoTaskAddOrEdit == null)
+            if (GlobalVariables.ToDoTasks == null)
                 return;
-            foreach(ToDoTask task in GlobalVariables.ToDoTaskAddOrEdit)
+            var tasks = GlobalVariables.ToDoTaskAddOrEdit.Where(x => x.Date == DateTimeOffset.Now.Date.ToShortDateString()).ToList();
+            foreach (ToDoTask task in tasks)
             {
                 if (DateTimeOffset.Parse(task.Date) > DateTimeOffset.Now )
                 {
@@ -24,15 +28,11 @@ namespace ToDoManager.Services.BackgroundTasks
 
                 if (DateTimeOffset.Parse(task.Date) == DateTimeOffset.Now)
                 {
-                    if(TimeSpan.Parse(task.Time) > DateTimeOffset.Now.TimeOfDay)
+                    if (TimeSpan.Parse(task.Time) > DateTimeOffset.Now.TimeOfDay)
                     {
                         task.Finish = true;
                     }
-
-                    
-
                 }
-
             }
         } 
     }
