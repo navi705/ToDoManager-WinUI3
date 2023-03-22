@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ToDoManager.Models;
 using ToDoManager.Services.BackgroundTasks;
@@ -83,7 +82,6 @@ namespace ToDoManager.ViewModels
                 Time = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm")
             };
             _navigationService.NavigateTo(typeof(AddOrEditTasksViewModel), newTask);
-
         }
 
         public async void Intilization()
@@ -94,7 +92,7 @@ namespace ToDoManager.ViewModels
                 var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true };
                 var tasksFromRequest = JsonSerializer.Deserialize<List<ToDoTask>>(response.Content.ReadAsStringAsync().Result.ToString(), options);
 
-                var tasks = checkTasks(tasksFromRequest);
+                var tasks = CheckTasks(tasksFromRequest);
                 var fakeBackgroundTask = new FakeBackgroundTask(tasks);
                 var stateTimer = new Timer(fakeBackgroundTask.CheckTasksNotify, new AutoResetEvent(false), 0, 600000);
 
@@ -123,7 +121,7 @@ namespace ToDoManager.ViewModels
 
         public async void CompeteTask(ToDoTask task)
         {
-            var collection = getCollection(task);
+            var collection = GetCollection(task);
             foreach (ToDoTask tasks in collection)
             {
                 if (task == tasks)
@@ -132,19 +130,19 @@ namespace ToDoManager.ViewModels
                     {
                         await _tasksService.DeleteTaskAddAsync(task.Name);
                         collection.Remove(tasks);
-                        addTimeNote(tasks);
+                        AddTimeNote(tasks);
                         return;
                     }
                     tasks.Finish = true;
                     await _tasksService.PutTaskAddAsync(tasks, tasks.Name);
                     collection.Remove(tasks);
-                    addTimeNote(tasks);
+                    AddTimeNote(tasks);
                     break;
                 }
             }
         }
 
-        private ObservableCollection<ToDoTask> getCollection(ToDoTask task)
+        private ObservableCollection<ToDoTask> GetCollection(ToDoTask task)
         {
             if (task.Reapet == "Simple Repeat")
                 return TasksSimply;
@@ -153,7 +151,7 @@ namespace ToDoManager.ViewModels
             return null;
         }
 
-        private async void addTimeNote(ToDoTask task)
+        private async void AddTimeNote(ToDoTask task)
         {
             TimeNote timeNote = new() { NameTask = task.Name, Date = task.Date, Of = task.Time, To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm") };
             await _timeService.PutTimeTableAsync(timeNote, "");
@@ -175,7 +173,7 @@ namespace ToDoManager.ViewModels
             return false;
         }
 
-        private List<ToDoTask> checkTasks(List<ToDoTask> tasks)
+        private List<ToDoTask> CheckTasks(List<ToDoTask> tasks)
         {
             if (tasks == null || tasks.Count == 0)
                 return new List<ToDoTask>();
@@ -222,6 +220,5 @@ namespace ToDoManager.ViewModels
             }
             return tasks;
         }
-
     }
 }

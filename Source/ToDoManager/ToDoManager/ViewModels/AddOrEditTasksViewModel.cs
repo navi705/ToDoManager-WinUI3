@@ -62,9 +62,9 @@ namespace ToDoManager.ViewModels
             }
         }
 
-        public ICommand ToTaskPage => new Command(() => cancelButton());
+        public ICommand ToTaskPage => new Command(() => CancelButton());
 
-        private void cancelButton()
+        private void CancelButton()
         {
             if (GlobalVariables.ToDoTaskAddOrEdit.Count == 0)
             {
@@ -80,7 +80,6 @@ namespace ToDoManager.ViewModels
         }
 
         public ICommand SaveData => new Command(() => saveData());
-        // awful
         private async void saveData()
         {
             if (Task.Name == "")
@@ -98,6 +97,7 @@ namespace ToDoManager.ViewModels
             {
                 if(GlobalVariables.ToDoTaskAddOrEdit.Last().Subtasks == null)
                     GlobalVariables.ToDoTaskAddOrEdit.Last().Subtasks.Add(Task);
+
                 if (!GlobalVariables.ToDoTaskAddOrEdit.Last().Subtasks.Contains(Task) )
                     GlobalVariables.ToDoTaskAddOrEdit.Last().Subtasks.Add(Task); 
                 var task = GlobalVariables.ToDoTaskAddOrEdit.Last();

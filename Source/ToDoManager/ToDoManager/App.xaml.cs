@@ -10,8 +10,7 @@ namespace ToDoManager
     {
         public App()
         {
-            this.InitializeComponent();
-           
+            this.InitializeComponent();        
         }
 
         public static Window m_window;
@@ -32,7 +31,5 @@ namespace ToDoManager
             };
             m_window.Activate();
         }
-
-
     }
 }
