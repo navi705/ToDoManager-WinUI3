@@ -10,24 +10,24 @@ namespace ToDoManager.Services.BackgroundTasks
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            if (GlobalVariables.ToDoTasks == null)
-                return;
-            var tasks = GlobalVariables.ToDoTaskAddOrEdit.Where(x => x.Date == DateTimeOffset.Now.Date.ToShortDateString()).ToList();
-            foreach (ToDoTask task in tasks)
-            {
-                if (DateTimeOffset.Parse(task.Date) > DateTimeOffset.Now )
-                {
-                    task.Finish = true;
-                }
+            //if (GlobalVariables.ToDoTasks == null)
+            //    return;
+            //var tasks = GlobalVariables.ToDoTaskAddOrEdit.Where(x => x.Date == DateTimeOffset.Now.Date.ToShortDateString()).ToList();
+            //foreach (ToDoTask task in tasks)
+            //{
+            //    if (DateTimeOffset.Parse(task.Date) > DateTimeOffset.Now )
+            //    {
+            //        task.Finish = true;
+            //    }
 
-                if (DateTimeOffset.Parse(task.Date) == DateTimeOffset.Now)
-                {
-                    if (TimeSpan.Parse(task.Time) > DateTimeOffset.Now.TimeOfDay)
-                    {
-                        task.Finish = true;
-                    }
-                }
-            }
+            //    if (DateTimeOffset.Parse(task.Date) == DateTimeOffset.Now)
+            //    {
+            //        if (TimeSpan.Parse(task.Time) > DateTimeOffset.Now.TimeOfDay)
+            //        {
+            //            task.Finish = true;
+            //        }
+            //    }
+            //}
         } 
     }
 }
