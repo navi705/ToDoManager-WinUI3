@@ -98,7 +98,7 @@ namespace ToDoManager.ViewModels
                 TasksToday = new ObservableCollection<ToDoTask>(tasks.Where(x => (x.Finish == false && x.Date == DateTimeOffset.Now.Date.ToShortDateString())).ToList());
                 TasksTomorrow = new ObservableCollection<ToDoTask>(tasks.Where(x => (x.Finish == false && 
                 x.Date == DateTimeOffset.Now.AddDays(1).Date.ToShortDateString())).ToList());
-                GlobalVariables.ToDoTasks = Tasks;
+               // GlobalVariables.ToDoTasks = Tasks;
             }
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
