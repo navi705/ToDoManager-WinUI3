@@ -30,13 +30,6 @@ namespace ToDoManager
                     m_window.Hide();
                 }
             };
-            //RegisterBackgroundTask.RegisterBackgroundTasks(typeof(TaskCompletedSoon).FullName, typeof(TaskCompletedSoon).FullName, new TimeTrigger(15, false), null);
-            //Error
-            //var builder = new BackgroundTaskBuilder();
-            //builder.Name = "BackgroundTask";
-            //// builder.SetTrigger(new TimeTrigger(60, false));
-            //builder.SetTrigger(new SystemTrigger(SystemTriggerType.UserPresent,false));
-            //BackgroundTaskRegistration task = builder.Register();
             m_window.Activate();
         }
 

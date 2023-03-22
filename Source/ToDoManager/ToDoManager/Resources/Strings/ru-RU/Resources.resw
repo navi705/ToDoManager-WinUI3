@@ -126,6 +126,9 @@
   <data name="All_Tasks.Text" xml:space="preserve">
     <value>Все Задачи</value>
   </data>
+  <data name="Auto_Skip.Header" xml:space="preserve">
+    <value>Авто пропуск</value>
+  </data>
   <data name="Auto_Skip.PlaceholderText" xml:space="preserve">
     <value>Авто Повторение</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="Reapeat_Password.PlaceholderText" xml:space="preserve">
     <value>Повторите пароль</value>
+  </data>
+  <data name="Reapet.Header" xml:space="preserve">
+    <value>Повторение</value>
   </data>
   <data name="Reapet.PlaceholderText" xml:space="preserve">
     <value>Повторения</value>

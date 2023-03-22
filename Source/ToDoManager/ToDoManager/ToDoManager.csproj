@@ -62,7 +62,6 @@
     <Folder Include="Pages\Authentication\" />
     <Folder Include="Pages\Content\TimeManager\" />
     <Folder Include="Services\Navigation\" />
-    <Folder Include="Services\Notification\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\RegisterPage.xaml">

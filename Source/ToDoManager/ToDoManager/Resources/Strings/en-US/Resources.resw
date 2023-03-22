@@ -126,6 +126,9 @@
   <data name="All_Tasks.Text" xml:space="preserve">
     <value>All Tasks</value>
   </data>
+  <data name="Auto_Skip.Header" xml:space="preserve">
+    <value>Auto Skip</value>
+  </data>
   <data name="Auto_Skip.PlaceholderText" xml:space="preserve">
     <value>Auto Skip</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="Reapeat_Password.PlaceholderText" xml:space="preserve">
     <value>Confirm Password</value>
+  </data>
+  <data name="Reapet.Header" xml:space="preserve">
+    <value>Reapet</value>
   </data>
   <data name="Reapet.PlaceholderText" xml:space="preserve">
     <value>Reapet</value>

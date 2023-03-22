@@ -5,9 +5,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using ToDoManager.HelpClasses;
 using ToDoManager.Models;
+using ToDoManager.Services.BackgroundTasks;
 using ToDoManager.Services.Navigation;
 using ToDoManager.Services.Tasks;
 using ToDoManager.Services.TimeManagerService;
@@ -80,7 +82,7 @@ namespace ToDoManager.ViewModels
                 Reapet = "Simple Repeat",
                 Time = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm")
             };
-            _navigationService.NavigateTo(typeof(AddOrEditTasksViewModel),newTask);
+            _navigationService.NavigateTo(typeof(AddOrEditTasksViewModel), newTask);
 
         }
 
@@ -90,15 +92,19 @@ namespace ToDoManager.ViewModels
             if (response.IsSuccessStatusCode)
             {
                 var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true };
-                var tasks = JsonSerializer.Deserialize<List<ToDoTask>>(response.Content.ReadAsStringAsync().Result.ToString(), options);
+                var tasksFromRequest = JsonSerializer.Deserialize<List<ToDoTask>>(response.Content.ReadAsStringAsync().Result.ToString(), options);
+
+                var tasks = checkTasks(tasksFromRequest);
+                var fakeBackgroundTask = new FakeBackgroundTask(tasks);
+                var stateTimer = new Timer(fakeBackgroundTask.CheckTasksNotify, new AutoResetEvent(false), 0, 600000);
+
                 Tasks = tasks;
                 TasksDaily = new ObservableCollection<ToDoTask>(tasks.Where(x => x.Reapet == "Daily").ToList());
-                TasksSimply = new ObservableCollection<ToDoTask>(tasks.Where(x => x.Finish == false && x.Reapet == "Simple Repeat" ).ToList());
-                TasksMouth= new ObservableCollection<ToDoTask>(tasks.Where(x => x.Reapet == "Mouthly").ToList());
+                TasksSimply = new ObservableCollection<ToDoTask>(tasks.Where(x => x.Finish == false && x.Reapet == "Simple Repeat").ToList());
+                TasksMouth = new ObservableCollection<ToDoTask>(tasks.Where(x => x.Reapet == "Mouthly").ToList());
                 TasksToday = new ObservableCollection<ToDoTask>(tasks.Where(x => (x.Finish == false && x.Date == DateTimeOffset.Now.Date.ToShortDateString())).ToList());
-                TasksTomorrow = new ObservableCollection<ToDoTask>(tasks.Where(x => (x.Finish == false && 
+                TasksTomorrow = new ObservableCollection<ToDoTask>(tasks.Where(x => (x.Finish == false &&
                 x.Date == DateTimeOffset.Now.AddDays(1).Date.ToShortDateString())).ToList());
-               // GlobalVariables.ToDoTasks = Tasks;
             }
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
@@ -112,7 +118,7 @@ namespace ToDoManager.ViewModels
         {
             var task = (ToDoTask)args.InvokedItem;
             if (IsNotChildTask(Tasks, task.Name))
-                _navigationService.NavigateTo(typeof(AddOrEditTasksViewModel),task);
+                _navigationService.NavigateTo(typeof(AddOrEditTasksViewModel), task);
         }
 
         public async void CompeteTask(ToDoTask task)
@@ -149,7 +155,7 @@ namespace ToDoManager.ViewModels
 
         private async void addTimeNote(ToDoTask task)
         {
-            TimeNote timeNote = new() { NameTask=task.Name, Date=task.Date,Of= DateTimeOffset.Now.Date.ToShortDateString() , To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm") };
+            TimeNote timeNote = new() { NameTask = task.Name, Date = task.Date, Of = task.Time, To = DateTimeOffset.Now.TimeOfDay.ToString(@"hh\:mm") };
             await _timeService.PutTimeTableAsync(timeNote, "");
         }
 
@@ -168,5 +174,54 @@ namespace ToDoManager.ViewModels
             }
             return false;
         }
+
+        private List<ToDoTask> checkTasks(List<ToDoTask> tasks)
+        {
+            if (tasks == null || tasks.Count == 0)
+                return new List<ToDoTask>();
+            foreach (ToDoTask task in tasks)
+            {
+                if (task.Auto_fail == true)
+                {
+                    if (DateTimeOffset.Parse(task.Date) < DateTimeOffset.Now.Date)
+                    {
+                        if (task.Reapet != "Simple Repeat")
+                            task.Date = DateTime.Now.Date.ToShortDateString();
+                        task.Finish = true;
+                    }
+
+                    if (DateTimeOffset.Parse(task.Date) == DateTimeOffset.Now.Date)
+                    {
+                        if (TimeSpan.Parse(task.Time) < DateTimeOffset.Now.TimeOfDay)
+                        {
+                            task.Finish = true;
+                        }
+                    }
+                }
+                // reset tasks
+                if (task.Reapet != "Simple Repeat")
+                {
+                    if (task.Reapet == "Daily")
+                    {
+                        if (DateTimeOffset.Parse(task.Date) < DateTimeOffset.Now.Date)
+                            task.Finish = false;
+                    }
+
+                    if (task.Reapet == "Weekly")
+                    {
+                        if (DateTimeOffset.Parse(task.Date) < DateTimeOffset.Now.Date.AddDays(7))
+                            task.Finish = false;
+                    }
+
+                    if (task.Reapet == "Mouthly")
+                    {
+                        if (DateTimeOffset.Parse(task.Date) < DateTimeOffset.Now.Date.AddDays(30))
+                            task.Finish = false;
+                    }
+                }
+            }
+            return tasks;
+        }
+
     }
 }
