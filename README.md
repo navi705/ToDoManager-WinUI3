@@ -14,7 +14,7 @@ Features:
 * Toast notification available
 * NotifyIcon and minimise to system tray are available
 ## Windows 11
-![](/Docs/ScreenshotWindows11.png)
+![](/Docs/LoginPage.png)
 ## Windows 10
 ![](/Docs/ScreenshotWindows10.png)
 # Architectures and patterns
