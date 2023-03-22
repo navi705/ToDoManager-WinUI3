@@ -10,23 +10,12 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using ToDoManager.IoC;
 using ToDoManager.Models;
 using ToDoManager.ViewModels;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace ToDoManager.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class AddOrEditTasksPage : Page
     {
         public AddOrEditTasksPage()
@@ -45,5 +34,10 @@ namespace ToDoManager.Pages
             ViewModel.TitleTask = task.Name;
         }
 
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var task = (ToDoTask) e.ClickedItem;
+            ViewModel.SelectedSubTask(task);
+        }
     }
 }

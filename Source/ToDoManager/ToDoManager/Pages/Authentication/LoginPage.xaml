@@ -1,5 +1,3 @@
-<!-- Copyright (c) Microsoft Corporation and Contributors. -->
-<!-- Licensed under the MIT License. -->
 
 <Page
     x:Class="ToDoManager.Pages.LoginPage"
@@ -20,31 +18,16 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
+            
             <TextBlock FontSize="26" Grid.Row="0" HorizontalAlignment="Center" Text="ToDoManager"/>
-            <TextBlock FontSize="20" Grid.Row="1" HorizontalAlignment="Center"  x:Uid="Login To Your Account"></TextBlock>
+            <TextBlock FontSize="20" Grid.Row="1" HorizontalAlignment="Center"  x:Uid="Login To Your Account"/>
             <TextBox  x:Uid="Email" Grid.Row="2" MaxLength="100" Text="{x:Bind ViewModel.Email, Mode=TwoWay}" IsSpellCheckEnabled="False" />
-            <PasswordBox x:Uid="Enter_Password" Grid.Row="3" MaxLength="100" Password="{x:Bind ViewModel.Password,Mode=TwoWay}" ></PasswordBox>
+            <PasswordBox x:Uid="Enter_Password" Grid.Row="3" MaxLength="100" Password="{x:Bind ViewModel.Password,Mode=TwoWay}" />
+            <Button x:Uid="Sign_In" HorizontalAlignment="Stretch" Grid.Row="4" Command="{x:Bind ViewModel.Sign_In}" />
+            <HyperlinkButton x:Uid="Dont Have Account" Grid.Row="5" HorizontalAlignment="Center" Command="{x:Bind ViewModel.ToRegisterPageCommand}"/>
+            <TextBlock Text="{x:Bind ViewModel.Status,Mode=TwoWay}" Grid.Row="6" Foreground="Red" TextWrapping="Wrap" HorizontalAlignment="Center" />
             
-            <Grid Grid.Row="4" HorizontalAlignment="Stretch" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"  />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <CheckBox x:Uid="Remember me"  Grid.Row="0" Grid.Column="0" />
-                <HyperlinkButton x:Uid="Forget password" Grid.Row="0"  Grid.Column="1"  />
-            </Grid>
-            
-            <Button x:Uid="Sign_In" HorizontalAlignment="Stretch" Grid.Row="5" Command="{x:Bind ViewModel.Sign_In}" ></Button>
-            <HyperlinkButton x:Uid="Dont Have Account" Grid.Row="6" HorizontalAlignment="Center" Command="{x:Bind ViewModel.ToRegisterPageCommand}"/>
-            <TextBlock Text="{x:Bind ViewModel.Status,Mode=TwoWay}" Grid.Row="7" Foreground="Red" TextWrapping="Wrap" HorizontalAlignment="Center" />
         </Grid>
-      
     </Grid>
-
 </Page>

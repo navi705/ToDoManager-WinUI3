@@ -1,5 +1,3 @@
-<!-- Copyright (c) Microsoft Corporation and Contributors. -->
-<!-- Licensed under the MIT License. -->
 
 <Page
     x:Class="ToDoManager.Pages.ShellPage"
@@ -24,16 +22,15 @@
     <Grid>
         <NavigationView IsBackButtonVisible="Collapsed" OpenPaneLength="200" IsPaneOpen="False" ItemInvoked="NavigationView_ItemInvoked" 
                         MenuItemTemplate="{StaticResource MenuTemplate}"
-                         MenuItemsSource="{x:Bind ViewModel.MenuItems}" >
-            <!--<NavigationView.MenuItems>
-                <NavigationViewItem Icon="AllApps" Content="ToDoList" />
-                <NavigationViewItem Icon="Calendar" Content="ToDoCalendar" />
-                <NavigationViewItem Icon="Clock" Content="TimeManagment" />
-            </NavigationView.MenuItems>-->
+                        FooterMenuItemsSource="{x:Bind ViewModel.FooterMenuItems}"
+                        MenuItemsSource="{x:Bind ViewModel.MenuItems}"
+                        IsSettingsVisible="False">
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Logout" Icon="Back" />
+            </NavigationView.FooterMenuItems>
             <Grid>
                 <Frame Name="MainContentFrame"/>
             </Grid>
-           
         </NavigationView>
     </Grid>
 </Page>

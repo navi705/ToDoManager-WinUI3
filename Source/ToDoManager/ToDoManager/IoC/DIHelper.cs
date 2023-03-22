@@ -24,7 +24,6 @@ namespace ToDoManager.IoC
             _container.Register<RegisterViewModel>();
             _container.Register<ShellViewModel>();
             _container.Register<TasksViewModel>();
-            _container.Register<SettingsViewModel>();
             _container.Register<AddOrEditTasksViewModel>();
             _container.Register<TimeMangerViewModel>();
 

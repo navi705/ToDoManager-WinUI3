@@ -46,8 +46,6 @@ namespace ToDoManager.Asp.Net.Core.Models
 
         public bool Auto_fail { get; set; } = false!;
 
-        public List<string> Group { get; set; } = null!;
-
         public bool Finish { get; set; } = false!;
     }
 

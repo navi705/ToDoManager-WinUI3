@@ -1,26 +1,10 @@
-﻿//need this model?
-
+﻿
 namespace ToDoManager.Models
 {
     public class User 
     {
-        string _email;
-        public string Email
-        {
-            get => _email;
+        public string Email {get; set;}
 
-            set => _email = value;
-
-        }
-
-        string _password;
-        public string Password
-        {
-            get => _password;
-
-            set => _password = value;
-        }
-
-
+        public string Password {get; set;}
     }
 }

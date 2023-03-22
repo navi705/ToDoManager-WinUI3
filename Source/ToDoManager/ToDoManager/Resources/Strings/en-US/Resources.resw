@@ -117,11 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add_Subtask.Content" xml:space="preserve">
+    <value>Add Subtask</value>
+  </data>
+  <data name="Add_Task.Content" xml:space="preserve">
+    <value>Add Task</value>
+  </data>
+  <data name="All_Tasks.Text" xml:space="preserve">
+    <value>All Tasks</value>
+  </data>
+  <data name="Auto_Skip.Header" xml:space="preserve">
+    <value>Auto Skip</value>
+  </data>
+  <data name="Auto_Skip.PlaceholderText" xml:space="preserve">
+    <value>Auto Skip</value>
+  </data>
   <data name="Back.Content" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="Cancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="Check_internet_connection" xml:space="preserve">
     <value>Check internet connection</value>
+  </data>
+  <data name="Daily_Tasks.Text" xml:space="preserve">
+    <value>Daily Tasks</value>
+  </data>
+  <data name="Delete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Description.PlaceholderText" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="Dont Have Account.Content" xml:space="preserve">
     <value>Don't Have Account? Register!</value>
@@ -147,6 +174,9 @@
   <data name="Login To Your Account.Text" xml:space="preserve">
     <value>Login To Your Account</value>
   </data>
+  <data name="Mouthly_Tasks.Text" xml:space="preserve">
+    <value>Mouthly Tasks</value>
+  </data>
   <data name="PasswordIsNotValid" xml:space="preserve">
     <value>Password must not be less than 6 characters</value>
   </data>
@@ -156,17 +186,35 @@
   <data name="Password_not_correct" xml:space="preserve">
     <value>Password not correct</value>
   </data>
+  <data name="Pick_a_date.Header" xml:space="preserve">
+    <value>Pick A Date</value>
+  </data>
+  <data name="Pick_a_time.Header" xml:space="preserve">
+    <value>Pick A Time</value>
+  </data>
   <data name="Please_fill_all_fields" xml:space="preserve">
     <value>Please fill all fields</value>
   </data>
   <data name="Reapeat_Password.PlaceholderText" xml:space="preserve">
-    <value>Repeat Password</value>
+    <value>Confirm Password</value>
+  </data>
+  <data name="Reapet.Header" xml:space="preserve">
+    <value>Reapet</value>
+  </data>
+  <data name="Reapet.PlaceholderText" xml:space="preserve">
+    <value>Reapet</value>
   </data>
   <data name="Register Your Account.Text" xml:space="preserve">
     <value>Register Your Account</value>
   </data>
   <data name="Remember me.Content" xml:space="preserve">
     <value>Remember me</value>
+  </data>
+  <data name="Save.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Save_All.Content" xml:space="preserve">
+    <value>Save All</value>
   </data>
   <data name="Server_error" xml:space="preserve">
     <value>Server error</value>
@@ -177,11 +225,26 @@
   <data name="Sign_Up.Content" xml:space="preserve">
     <value>Sign Up</value>
   </data>
+  <data name="Simple_Reapet_Tasks.Text" xml:space="preserve">
+    <value>Simple Reapet Tasks</value>
+  </data>
   <data name="Successfully" xml:space="preserve">
     <value>Successfully</value>
   </data>
+  <data name="Task_Add_Or_Edit.Text" xml:space="preserve">
+    <value>Task Add Or Edit</value>
+  </data>
   <data name="This_user_already_exists" xml:space="preserve">
     <value>This user already exists</value>
+  </data>
+  <data name="Title_task.PlaceholderText" xml:space="preserve">
+    <value>Title Task</value>
+  </data>
+  <data name="Today_Tasks.Text" xml:space="preserve">
+    <value>Today Tasks</value>
+  </data>
+  <data name="Tommorw_Tasks.Text" xml:space="preserve">
+    <value>Tommorw Tasks</value>
   </data>
   <data name="User_not_found" xml:space="preserve">
     <value>User not found</value>

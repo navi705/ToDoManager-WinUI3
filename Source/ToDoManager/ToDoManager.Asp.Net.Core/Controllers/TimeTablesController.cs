@@ -6,12 +6,12 @@ using ToDoManager.Asp.Net.Core.Services;
 
 namespace ToDoManager.Asp.Net.Core.Controllers
 {
-    public class TimeTableController : Controller
+    public class TimeTablesController : Controller
     {
         private readonly JwtService _jwtService;
         private readonly MongoDbService _mongoDbService;
 
-        public TimeTableController(MongoDbService mongoDbService, JwtService jwtService)
+        public TimeTablesController(MongoDbService mongoDbService, JwtService jwtService)
         {
             _jwtService = jwtService;
             _mongoDbService = mongoDbService;
@@ -30,8 +30,8 @@ namespace ToDoManager.Asp.Net.Core.Controllers
 
         [HttpPut]
         [Authorize]
-        [Route("timetable")]
-        public async Task<IActionResult> PutTimeTable(string name, [FromBody] TimeNote time)
+        [Route("timetables")]
+        public async Task<IActionResult> PutTimeTables(string name, [FromBody] TimeNote time)
         {
             string token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
             string email = _jwtService.DecodeToken(token);
@@ -41,8 +41,8 @@ namespace ToDoManager.Asp.Net.Core.Controllers
 
         [HttpDelete]
         [Authorize]
-        [Route("timetable")]
-        public async Task<IActionResult> DelteTimeTable(string name)
+        [Route("timetables")]
+        public async Task<IActionResult> DelteTimeTables(string name)
         {
             string token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
             string email = _jwtService.DecodeToken(token);

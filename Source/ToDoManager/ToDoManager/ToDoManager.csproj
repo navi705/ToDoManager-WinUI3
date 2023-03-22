@@ -17,10 +17,11 @@
     <None Remove="Pages\AddOrEditTasks.xaml" />
     <None Remove="Pages\LoginPage.xaml" />
     <None Remove="Pages\RegisterPage.xaml" />
-    <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\ShellPage.xaml" />
     <None Remove="Pages\TasksPage.xaml" />
     <None Remove="Pages\TimeMangerPage.xaml" />
+    <None Remove="Resources\Assets\TrayIcon.ico" />
+    <None Remove="Resources\TrayIconView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,14 +37,15 @@
     <Content Include="Resources\Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Resources\Assets\StoreLogo.png" />
     <Content Include="Resources\Assets\StoreLogo.png" />
+    <Content Include="Resources\Assets\TrayIcon.ico" />
     <Content Include="Resources\Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Resources\Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.76" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
@@ -60,7 +62,6 @@
     <Folder Include="Pages\Authentication\" />
     <Folder Include="Pages\Content\TimeManager\" />
     <Folder Include="Services\Navigation\" />
-    <Folder Include="Services\Notification\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\RegisterPage.xaml">
@@ -95,17 +96,17 @@
     <EmbeddedResource Include="Resources\Strings\ru-RU\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Resources\TrayIconView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Pages\TimeMangerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\AddOrEditTasks.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

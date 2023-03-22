@@ -1,6 +1,3 @@
-<!-- Copyright (c) Microsoft Corporation and Contributors. -->
-<!-- Licensed under the MIT License. -->
-
 <Page
     x:Class="ToDoManager.Pages.RegisterPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -10,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <!--promlem with aligment in all page hard bind position-->
     <Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20" RowSpacing="20"  CornerRadius="10,10,10,10" BorderThickness="1" BorderBrush="{ThemeResource SystemAccentColor}" >
             <Grid.RowDefinitions>
@@ -19,8 +15,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto"  />
-                <RowDefinition  Height="Auto"  />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock x:Uid="Register Your Account" FontSize="20" Grid.Row="0" />
             <TextBox x:Uid="Email" Grid.Row="1" IsSpellCheckEnabled="False" Text="{x:Bind ViewModel.Email, Mode=TwoWay}" />
@@ -28,7 +24,7 @@
             <PasswordBox x:Uid="Reapeat_Password" Grid.Row="3" Password="{x:Bind ViewModel.ConfirmPassword, Mode=TwoWay}" />
             <Button x:Uid="Sign_Up" HorizontalAlignment="Stretch"  Grid.Row="4" Command="{x:Bind ViewModel.Sign_Up}"  />
             <Button x:Uid="Back" HorizontalAlignment="Stretch" Grid.Row="5" MaxWidth="170" Command="{x:Bind ViewModel.ToLoginPageCommand}" />
-            <TextBlock Text="{x:Bind ViewModel.Status,Mode=TwoWay}" Grid.Row="6" Foreground="{x:Bind ViewModel.StatusColor,Mode=TwoWay}"  HorizontalAlignment="Center" MaxWidth="200" TextAlignment="Center" TextWrapping="Wrap" />            
+            <TextBlock Text="{x:Bind ViewModel.Status,Mode=TwoWay}" Grid.Row="6" Foreground="{x:Bind ViewModel.StatusColor,Mode=TwoWay}"  HorizontalAlignment="Center" MaxWidth="200" TextAlignment="Center" TextWrapping="Wrap" />
         </Grid>
     </Grid>
 </Page>
