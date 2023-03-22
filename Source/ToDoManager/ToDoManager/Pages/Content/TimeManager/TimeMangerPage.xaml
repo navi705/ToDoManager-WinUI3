@@ -74,7 +74,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBox Text="{x:Bind NameTask,Mode=TwoWay }"  Grid.Column="0" Grid.Row="1" Width="100" />
+                            <TextBox Text="{x:Bind NameTask,Mode=TwoWay }"  Grid.Column="0" Grid.Row="1" Width="100" IsSpellCheckEnabled="False" />
                             <TimePicker Time="{x:Bind Of,Mode=TwoWay,Converter={StaticResource myTimeConverter}}" Grid.Column="1" Grid.Row="1" FontSize="14" />
                             <TimePicker Time="{x:Bind To,Mode=TwoWay,Converter={StaticResource myTimeConverter}}" Grid.Column="2" Grid.Row="1"  FontSize="14" />
 

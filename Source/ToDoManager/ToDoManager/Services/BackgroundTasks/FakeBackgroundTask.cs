@@ -29,18 +29,24 @@ namespace ToDoManager.Services.BackgroundTasks
                     if (DateTimeOffset.Parse(task.Date) == DateTimeOffset.Now.Date)
                     {
                         if (DateTimeOffset.Now.TimeOfDay - TimeSpan.Parse(task.Time) > TimeSpan.Parse("-00:30") && DateTimeOffset.Now.TimeOfDay - TimeSpan.Parse(task.Time) < TimeSpan.Parse("-00:20"))
-                        { 
+                        {
+                            AppNotificationManager.Default.NotificationInvoked += OnNotificationInvoked;
+                            //Not work bug
+                            //AppNotificationManager.Default.Register();
                             var notification = new AppNotificationBuilder()
-                                .AddArgument("action","Launch")
-                                .AddArgument("action", "ToastClick")
                                 .AddText($"{task.Name} {task.Time}")
                                 .BuildNotification();
                             AppNotificationManager.Default.Show(notification);
+                            
                         }
                     }
 
                 }
             }
+        }
+        private void OnNotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
+        {
+            // pass
         }
     }
 }

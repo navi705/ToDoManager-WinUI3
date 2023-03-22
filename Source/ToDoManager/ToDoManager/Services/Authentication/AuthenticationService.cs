@@ -20,7 +20,6 @@ namespace ToDoManager.Services.Authentication
                 Email = email,
                 Password = password
             };
-            // camel case думаю не даст сделать запрос
             HttpResponseMessage response;
             try
             {
@@ -34,14 +33,12 @@ namespace ToDoManager.Services.Authentication
         }
 
         public async Task<string> SignUpAsync(string email, string password)
-        {
-            // http cringe intilization in method         
+        {      
             User user = new User()
             {
                 Email = email,
                 Password = password
             };
-           // StringContent content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
             HttpResponseMessage response;
             try
             {
