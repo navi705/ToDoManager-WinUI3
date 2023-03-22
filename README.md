@@ -2,7 +2,7 @@
 **TodoManager**-is a WinUI 3 ***training project*** is designed to manage, record your routine tasks.
 
 Brief description of the process:
-* When starting up for the first time, register and log in. (More screenshots in [Pages](/Source/Docs))
+* When starting up for the first time, register and log in. (More screenshots in Docs)
 * Add a task and set up a task
 * Execute the task by clicking on the ticked button.(Notifications arrive half an hour before the appointed time)
 * Go to the "TimeManager" page your task will automatically be added to the schedule if you need to correct the time.
