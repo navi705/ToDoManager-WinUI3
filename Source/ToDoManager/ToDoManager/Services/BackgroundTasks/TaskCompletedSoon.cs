@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using ToDoManager.HelpClasses;
 using ToDoManager.Models;
 using Windows.ApplicationModel.Background;
 
 namespace ToDoManager.Services.BackgroundTasks
 {
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.None)]
-    [Guid("56e48bc6-a15b-4e63-9495-a6cf6f788bce")]
-    [ComSourceInterfaces(typeof(IBackgroundTask))]
-    public class TaskCompletedSoon : IBackgroundTask
+    public  class TaskCompletedSoon : IBackgroundTask
     {
-        [MTAThread]
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             if (GlobalVariables.ToDoTasks == null)

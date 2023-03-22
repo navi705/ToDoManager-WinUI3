@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using ToDoManager.Services.Navigation;
 using ToDoManager.IoC;
 using H.NotifyIcon.Core;
+using Windows.ApplicationModel.Background;
 
 namespace ToDoManager
 {
@@ -15,7 +16,7 @@ namespace ToDoManager
             SetTitleBar(TitleBar);
 
             var navigationService = DIHelper.Resolve<INavigationService>();
-            navigationService.InitializeFrame(MainFrame);           
+            navigationService.InitializeFrame(MainFrame);
         }
     }
 }
